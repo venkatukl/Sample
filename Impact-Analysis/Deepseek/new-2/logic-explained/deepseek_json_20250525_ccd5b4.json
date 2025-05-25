@@ -1,0 +1,12 @@
+{
+  "nodes": [
+    {
+      "id": "payment-service:com.example.payment.PaymentService",
+      "type": "Service",
+      "repo": "payment-service",
+      "responsibility": "Processes payment transactions...",
+      "embedding": [...]
+    }
+  ],
+  "edges": [...]
+}

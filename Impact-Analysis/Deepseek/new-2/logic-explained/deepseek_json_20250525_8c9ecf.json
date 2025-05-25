@@ -1,0 +1,6 @@
+{
+  "class_name": "PaymentService",
+  "package": "com.example.payment",
+  "dependencies": {...},
+  "responsibility": "Processes payment transactions, validates fraud checks, and coordinates with UserService for authorization"
+}

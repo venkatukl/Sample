@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    {
+      "id": "payment-service:com.payment.PaymentService",
+      "type": "Service",
+      "repo": "payment-service",
+      "responsibility": "Handles payment processing logic",
+      "embedding": [0.23, -0.45, ..., 1.2]  # 384-dim vector (all-MiniLM-L6-v2)
+    },
+    ...
+  ],
+  "edges": [...]
+}

@@ -1,0 +1,95 @@
+{
+  "nodes": [
+    {
+      "id": "Spring-boot-Banking:com.banking.controller.AccountController",
+      "type": "RestController",
+      "repo": "Spring-boot-Banking",
+      "responsibility": "Handles HTTP requests for account operations like creation, balance checks, and transfers",
+      "embedding": [0.12, -0.34, 0.56, -0.78, 0.90, 0.12, -0.34, 0.56, -0.78, 0.90]
+    },
+    {
+      "id": "Spring-boot-Banking:com.banking.service.AccountService",
+      "type": "Service",
+      "repo": "Spring-boot-Banking",
+      "responsibility": "Contains business logic for account management and transaction processing",
+      "embedding": [-0.12, 0.34, -0.56, 0.78, -0.90, -0.12, 0.34, -0.56, 0.78, -0.90]
+    },
+    {
+      "id": "Spring-boot-Banking:com.banking.repository.AccountRepository",
+      "type": "Repository",
+      "repo": "Spring-boot-Banking",
+      "responsibility": "Manages database operations for Account entities using JPA",
+      "embedding": [0.23, -0.45, 0.67, -0.89, 0.10, 0.23, -0.45, 0.67, -0.89, 0.10]
+    },
+    {
+      "id": "Spring-boot-Banking:com.banking.model.Account",
+      "type": "Entity",
+      "repo": "Spring-boot-Banking",
+      "responsibility": "Represents a bank account with balance and owner information",
+      "embedding": [-0.23, 0.45, -0.67, 0.89, -0.10, -0.23, 0.45, -0.67, 0.89, -0.10]
+    },
+    {
+      "id": "Spring-boot-Banking:com.banking.controller.TransactionController",
+      "type": "RestController",
+      "repo": "Spring-boot-Banking",
+      "responsibility": "Handles HTTP requests for transaction history and operations",
+      "embedding": [0.34, -0.56, 0.78, -0.90, 0.12, 0.34, -0.56, 0.78, -0.90, 0.12]
+    },
+    {
+      "id": "Spring-boot-Banking:com.banking.service.TransactionService",
+      "type": "Service",
+      "repo": "Spring-boot-Banking",
+      "responsibility": "Manages transaction processing and history recording",
+      "embedding": [-0.34, 0.56, -0.78, 0.90, -0.12, -0.34, 0.56, -0.78, 0.90, -0.12]
+    },
+    {
+      "id": "h2:banking_db",
+      "type": "Database",
+      "repo": "external",
+      "responsibility": "Embedded database storing account and transaction data",
+      "embedding": [0.45, -0.67, 0.89, -0.10, 0.23, 0.45, -0.67, 0.89, -0.10, 0.23]
+    }
+  ],
+  "edges": [
+    {
+      "source": "Spring-boot-Banking:com.banking.controller.AccountController",
+      "target": "Spring-boot-Banking:com.banking.service.AccountService",
+      "type": "method_call",
+      "label": "@Autowired"
+    },
+    {
+      "source": "Spring-boot-Banking:com.banking.service.AccountService",
+      "target": "Spring-boot-Banking:com.banking.repository.AccountRepository",
+      "type": "method_call",
+      "label": "JPA queries"
+    },
+    {
+      "source": "Spring-boot-Banking:com.banking.service.AccountService",
+      "target": "Spring-boot-Banking:com.banking.service.TransactionService",
+      "type": "method_call",
+      "label": "Process transactions"
+    },
+    {
+      "source": "Spring-boot-Banking:com.banking.repository.AccountRepository",
+      "target": "h2:banking_db",
+      "type": "database",
+      "label": "JDBC connection"
+    },
+    {
+      "source": "Spring-boot-Banking:com.banking.controller.TransactionController",
+      "target": "Spring-boot-Banking:com.banking.service.TransactionService",
+      "type": "method_call",
+      "label": "@Autowired"
+    }
+  ],
+  "metadata": {
+    "repositories": [
+      {
+        "name": "Spring-boot-Banking",
+        "service_count": 6
+      }
+    ],
+    "external_dependencies": ["h2"],
+    "generated_at": "2023-11-15T14:30:00Z"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "nodes": [
+    {
+      "id": "Spring-boot-Banking:com.banking.AccountService",
+      "type": "Service",
+      "responsibility": "Processes payments and manages balances",
+      "embedding": [...]
+    }
+  ],
+  "edges": [
+    {
+      "source": "Spring-boot-Banking:com.banking.AccountController",
+      "target": "Spring-boot-Banking:com.banking.AccountService",
+      "type": "method_call"
+    }
+  ]
+}
