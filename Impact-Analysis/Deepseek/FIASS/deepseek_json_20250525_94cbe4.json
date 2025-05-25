@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {"id": "payment-service:com.payment.PaymentController", "type": "RestController", "repo": "payment-service"},
+    {"id": "payment-service:com.payment.PaymentService", "type": "Service", "repo": "payment-service"},
+    {"id": "payment-service:com.payment.PaymentRepository", "type": "Repository", "repo": "payment-service"},
+    {"id": "user-service:com.user.UserController", "type": "RestController", "repo": "user-service"},
+    {"id": "user-service:com.user.UserService", "type": "Service", "repo": "user-service"},
+    {"id": "notification-service:com.notify.EmailService", "type": "Service", "repo": "notification-service"},
+    {"id": "payment-service:com.payment.FraudCheckService", "type": "Service", "repo": "payment-service"},
+    {"id": "mysql:payments_db", "type": "Database", "repo": "external"},
+    {"id": "kafka:payment_events", "type": "MessageQueue", "repo": "external"}
+  ],
+  "edges": [
+    {
+      "source": "payment-service:com.payment.PaymentController",
+      "target": "payment-service:com.payment.PaymentService",
+      "type": "method_call",
+      "label": "@Autowired"
+    },
+    {
+      "source": "payment-service:com.payment.PaymentService",
+      "target": "payment-service:com.payment.PaymentRepository",
+      "type": "method_call",
+      "label": "JPA queries"
+    },
+    {
+      "source": "payment-service:com.payment.PaymentService",
+      "target": "user-service:com.user.UserService",
+      "type": "http",
+      "label": "RestTemplate call",
+      "details": {
+        "endpoint": "/api/users/validate",
+        "method": "POST"
+      }
+    },
+    {
+      "source": "payment-service:com.payment.PaymentService",
+      "target": "notification-service:com.notify.EmailService",
+      "type": "feign_client",
+      "label": "@FeignClient(name='email-service')"
+    },
+    {
+      "source": "payment-service:com.payment.PaymentService",
+      "target": "mysql:payments_db",
+      "type": "database",
+      "label": "JDBC connection"
+    },
+    {
+      "source": "payment-service:com.payment.PaymentService",
+      "target": "kafka:payment_events",
+      "type": "message_queue",
+      "label": "KafkaTemplate.send()"
+    },
+    {
+      "source": "user-service:com.user.UserController",
+      "target": "user-service:com.user.UserService",
+      "type": "method_call",
+      "label": "@Autowired"
+    },
+    {
+      "source": "payment-service:com.payment.FraudCheckService",
+      "target": "payment-service:com.payment.PaymentService",
+      "type": "method_call",
+      "label": "Async call"
+    }
+  ],
+  "metadata": {
+    "repositories": [
+      {"name": "payment-service", "service_count": 4},
+      {"name": "user-service", "service_count": 2},
+      {"name": "notification-service", "service_count": 1}
+    ],
+    "external_dependencies": ["mysql", "kafka"],
+    "generated_at": "2024-03-15T10:00:00Z"
+  }
+}

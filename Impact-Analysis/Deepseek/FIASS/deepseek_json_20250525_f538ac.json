@@ -1,0 +1,10 @@
+// Optional enhancements
+"edges": [
+  {
+    "source": "...",
+    "target": "...",
+    "tokens": 85,           // For cost tracking
+    "code_excerpt": "...",  // Relevant code snippet
+    "config_ref": "payment-service/src/main/resources/application.yml#L42"
+  }
+]
