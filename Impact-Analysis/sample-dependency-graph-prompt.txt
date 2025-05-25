@@ -1,0 +1,50 @@
+I have the below requirement to be accomplished using LLM:
+
+1. Clone the code from GitHub - I can pass in up to 3 different repositories (assume all are Java based repos using Spring Framework and Java 17+)
+2. Parse all 3 source code repos and create a detailed dependency graph (as a .JSON file) including their intra-repository and inter-repository relationship 
+(eg., API calls in every repository and between microservices in different repositories, Database / MQ dependencies etc.,)
+3. Find the best way to make LLM understand all 3 code bases including their dependency
+4. Expose a chat interface where users (technical and non-technical) can ask any question about any of those 3 code bases
+5. Implement a fool-proof solution that can answer high level questions (eg., Explain the high level overview of the application) as well as 
+granular questions (eg., What's the impact of changing the return type of an existing API? What all downstream/upstream systems are impacted?)
+
+Available Tools:
+1. Sentence Transformer model (all-MiniLm-v6) with token limit of 500
+2. Access to in-house LLM API (uses Gemini Flash 2.0 model)
+
+
+Please help me with the best approach to implement this requirement and make this entire thing really work. 
+Consider all factors like LLM weights, rate limits, context window and token limits etc., while proposing the solution.
+Ensure no content would be stripped off because of token limits or any other restrictions with this proposed solution.
+The proposed solution must be implemented using Python 3. Explicitly mention any limitations (eg., using Java parsers).
+Explain in detail and provide code snippets for parsing files, generating dependency graph, embedding and how to retrieve relevant files based on user query
+If required, eliminate the need for AST parsers and utilize LLM for parsing and generating dependency graph
+
+
+
+yes, would be better if you could provide a code snippet using JavaParser that can show how to generate a JSON file that has dependency graph properly constructed.
+
+
+
+I have the below requirement to be accomplished using LLM:
+
+1. Clone the code from GitHub - I can pass in up to 3 different repositories (assume all are Java based repos using Spring Framework and Java 17+)
+2. Loop through all 3 source code repos, send every .java file to LLM and create a detailed consolidated dependency graph (as a .JSON file) including their intra-repository and inter-repository relationship 
+(eg., API calls in every repository and between microservices in different repositories, Database / MQ dependencies etc.,). I can send the application.yml/ application.properties in every API call along with individual file's source code for better inference.
+3. Find the best way to make LLM understand all 3 code bases including their dependencies
+4. Expose a chat interface where users (technical and non-technical) can ask any question about any of those 3 code bases
+5. Implement a fool-proof solution that can answer high level questions (eg., Explain the high level overview of the application) as well as 
+granular questions (eg., What's the impact of changing the return type of an existing API? What all downstream/upstream systems are impacted?)
+
+Available Tools:
+1. Sentence Transformer model (all-MiniLm-v6) with token limit of 500
+2. Access to in-house LLM API (uses Gemini Flash 2.0 model)
+
+
+Please help me with the best approach to implement this requirement and make this entire thing really work. 
+Consider all factors like LLM weights, rate limits, context window and token limits etc., while proposing the solution.
+Ensure no content would be stripped off because of token limits or any other restrictions with this proposed solution.
+The proposed solution must be implemented using Python 3. Explicitly mention any limitations (eg., using Java parsers).
+Explain in detail and provide code snippets for parsing files, generating dependency graph, embedding and how to retrieve relevant files based on user query
+
+

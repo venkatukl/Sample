@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "id": "repo1:com.example.UserController",
+      "type": "Class",
+      "repo": "repo1",
+      "label": "UserController",
+      "attributes": { "annotation": "RestController" }
+    },
+    {
+      "id": "repo1:com.example.UserController#getUser",
+      "type": "Method",
+      "repo": "repo1",
+      "label": "getUser",
+      "attributes": { "annotation": "GetMapping" }
+    },
+    {
+      "id": "repo2:com.example.AuthService",
+      "type": "Class",
+      "repo": "repo2",
+      "label": "AuthService",
+      "attributes": { "annotation": "Service" }
+    }
+  ],
+  "edges": [
+    {
+      "source": "repo1:com.example.UserController",
+      "target": "repo2:com.example.AuthService",
+      "type": "Dependency"
+    },
+    {
+      "source": "repo1:com.example.UserController#getUser",
+      "target": "repo2:com.example.AuthService#authenticate",
+      "type": "MethodCall"
+    }
+  ]
+}

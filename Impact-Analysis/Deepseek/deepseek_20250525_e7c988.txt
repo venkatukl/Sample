@@ -1,0 +1,11 @@
+1. Repository Cloner
+   ↓
+2. File Processor & Parser
+   ↓
+3. Hierarchical LLM Analyzer (with chunking for large files)
+   ↓
+4. Dependency Graph Generator
+   ↓
+5. Vector Embedding Store
+   ↓
+6. Question Answering System

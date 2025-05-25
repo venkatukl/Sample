@@ -1,0 +1,6 @@
+The system consists of 3 repositories:
+1. payment-service (12 services including PaymentController, FraudCheckService...)
+  - Connects to: user-service, notification-service
+2. user-service (8 services including UserProfileService, AuthService...)
+  - Connects to: payment-service
+3. notification-service (5 services including EmailService, SMSSender...)

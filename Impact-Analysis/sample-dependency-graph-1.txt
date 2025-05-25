@@ -1,0 +1,59 @@
+{
+  "nodes": [
+    {"id": "repo_1:UserService", "type": "class", "repo": "repo_1"},
+    {"id": "payment-service", "type": "service", "repo": "inferred"},
+    {"id": "db:User", "type": "database", "repo": "repo_1"}
+  ],
+  "edges": [
+    {"source": "repo_1:UserService", "target": "api:/api/users/{id}", "type": "api_call"},
+    {"source": "repo_1:PaymentClient", "target": "payment-service", "type": "api_call"},
+    {"source": "repo_1:UserService", "target": "db:User", "type": "db_access"}
+  ],
+  "repos": {
+    "repo_1": [...]
+  }
+}
+
+
+
+
+{
+    'file': 'UserService.java',
+    'classes': [
+        {
+            'name': 'UserService',
+            'annotations': ['Service'],
+            'fields': [{'name': 'paymentServiceUrl', 'annotations': ['Value'], 'value': '${payment.service.url}'}],
+            'methods': [{'name': 'getPayment', 'annotations': [], 'parameters': ['Long']}],
+            'dependencies': {
+                'api_calls': [],
+                'db': [],
+                'mq': [],
+                'rest_calls': [{'class': 'UserService', 'method': 'getPayment', 'urls': ['paymentServiceUrl + "/api/payments/" + id']}]
+            }
+        }
+    ]
+}
+
+
+
+{
+  "nodes": [
+    {"id": "repo_1:UserService", "type": "class", "repo": "repo_1"},
+    {"id": "payment-service", "type": "service", "repo": "inferred"},
+    {"id": "db:User", "type": "database", "repo": "repo_1"},
+    {"id": "mq:orders", "type": "queue", "repo": "repo_1"}
+{"id": "repo_1:AppConfig", "type": "configuration", "repo": "repo_1"},
+  ],
+  "edges": [
+    {"source": "repo_1:UserService", "target": "api:/api/users/{id}", "type": "api_call"},
+    {"source": "repo_1:UserService", "target": "payment-service", "type": "api_call"},
+    {"source": "repo_1:UserService", "target": "db:User", "type": "db_access"},
+    {"source": "repo_1:OrderService", "target": "mq:orders", "type": "mq_access"}
+{"source": "repo_1:AppConfig", "target": "payment-service", "type": "api_call"}
+  ],
+  "repos": {
+    "repo_1": [...]
+  }
+}
+

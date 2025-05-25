@@ -1,0 +1,83 @@
+1. Read all source and config files
+2. Chunk and batch them (based on Gemini Flash token limits)
+3. For each chunk, ask Gemini:
+   “Extract and summarize dependencies in JSON format.”
+4. Merge all the responses
+5. Build a final consolidated dependency graph
+
+
+You are an expert software architect.
+
+Here is a Java Spring source file and related configuration. From this file, extract the following in JSON format:
+
+1. Service/Controller class name and its API endpoints (method + path).
+2. Internal method calls to other components or services.
+3. Any database usage (tables/entities, queries).
+4. Any messaging (Kafka, RabbitMQ, JMS) topics or queues used.
+5. Any REST calls made to external microservices.
+6. Environment properties used from application.yml/properties (e.g., DB_URL, MQ_HOST).
+7. Fully qualify cross-repository interactions where possible (e.g., Repo1.ServiceA -> Repo2.ServiceB).
+
+Respond only with a well-formatted JSON block with keys:
+`class`, `api_exposed`, `internal_calls`, `db_usage`, `messaging`, `external_calls`, `env_properties`, `repo_links`
+
+
+
+
+{
+  "class": "com.example.order.OrderController",
+  "api_exposed": [
+    {
+      "method": "GET",
+      "path": "/orders/{id}",
+      "description": "Fetch order details"
+    },
+    {
+      "method": "POST",
+      "path": "/orders",
+      "description": "Create a new order"
+    }
+  ],
+  "internal_calls": [
+    {
+      "target_class": "OrderService",
+      "method": "createOrder"
+    },
+    {
+      "target_class": "NotificationService",
+      "method": "sendOrderCreatedEmail"
+    }
+  ],
+  "db_usage": [
+    {
+      "entity": "Order",
+      "table": "orders",
+      "operation": "SELECT, INSERT"
+    }
+  ],
+  "messaging": [
+    {
+      "type": "Kafka",
+      "topic": "order.created",
+      "direction": "publish"
+    }
+  ],
+  "external_calls": [
+    {
+      "url": "http://inventory-service/api/items",
+      "method": "GET",
+      "description": "Check inventory before placing order"
+    }
+  ],
+  "env_properties": [
+    "spring.datasource.url",
+    "kafka.bootstrap-servers"
+  ],
+  "repo_links": [
+    {
+      "from_repo": "order-service",
+      "to_repo": "inventory-service",
+      "via": "REST API"
+    }
+  ]
+}

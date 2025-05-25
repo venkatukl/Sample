@@ -1,0 +1,9 @@
+## repo1:com.payment.PaymentService
+Directly impacts 4 components:
+- repo1:com.payment.PaymentController (HTTP)
+- repo2:com.order.OrderService (gRPC)
+- repo1:com.payment.ReceiptGenerator (method_call)
+
+Depends on 2 components:
+- repo1:com.payment.FraudChecker (method_call)
+- repo3:com.logging.AuditService (Kafka)
